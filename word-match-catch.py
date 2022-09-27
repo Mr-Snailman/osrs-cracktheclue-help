@@ -1,6 +1,8 @@
 # Thought process is that you can search for words from the free-to-play fish, remove them and there may be an anagram left over.
 # Run command is: python word-match-catch.py
 
+import pprint
+
 # Common words to search for in the clues.
 dictionaryWords = [
     'FISH',
@@ -54,6 +56,14 @@ clueSections = [
     'ANEUOASGNHSFALEHND'
 ]
 
+def transpose(m):
+    return [[m[j][i] for j in range(len(m))] for i in range(len(m[0]))]
+
+matrix = transpose(clueFullLines)
+clueTransposed = []
+for i in range(len(matrix)):
+    clueTransposed.append(''.join(matrix[i]))
+
 def searchDictionary(clueLines):
     results = {}
     # For each Line of the clue...
@@ -83,8 +93,10 @@ def searchDictionary(clueLines):
     return results
 
 def main():
-    print(searchDictionary(clueFullLines))
-    print(searchDictionary(clueSections))
+    pp = pprint.PrettyPrinter(depth=3)
+    pp.pprint(searchDictionary(clueFullLines))
+    pp.pprint(searchDictionary(clueSections))
+    pp.pprint(searchDictionary(clueTransposed))
 
 main()
 
