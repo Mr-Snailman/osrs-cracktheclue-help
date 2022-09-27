@@ -6,13 +6,16 @@ import pprint
 # Common words to search for in the clues.
 dictionaryWords = [
     'FISH',
-    'SHRIMP',
-    'SARDINE',
-    'HERRING',
     'ANCHOVIES',
-    'SWORDFISH',
-    'TUNA',
+    'HERRING',
     'LOBSTER',
+    'PIKE',
+    'SALMON',
+    'SARDINE',
+    'SHRIMP',
+    'SWORDFISH',
+    'TROUT',
+    'TUNA',
     'NET',
     'ROD',
     'POT'
