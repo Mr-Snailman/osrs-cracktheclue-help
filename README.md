@@ -25,3 +25,7 @@ Future work would include:
 * Streamlining command-line usage
 * Include other ciphers (FISH cipher AKA UK's Enigma-like cipher engine?)
 
+## Other Utilities
+
+World Map: https://cdn.runescape.com/assets/img/external/oldschool/2022/newsposts/2022-04-26/osrs_world_map_april19_2022.png
+
