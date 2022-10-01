@@ -21,7 +21,10 @@ fishWords = [
     'TUNA',
     'NET',
     'ROD',
-    'POT'
+    'POT',
+    'FEATHER',
+    'HARPOON',
+    'BAIT'
 ]
 
 # Search for Common Locations
@@ -94,6 +97,8 @@ clueSections = [
     'ANEUOASGNHSFALEHND'
 ]
 
+fishMatches = ['EHEESSVEMGJTCWSRDCRRODPJAWY']
+
 clueBetweenII = ['TBICPATELTTMHSFTOAINWLXARKLANFEOENIRSRONOFKGVEKAREHERESSOVEMDGJTCWSTASEWNHEVGRANOKNOTHRFRONLRATTATTIQATMIVWDMKDTCBANGBFKWVK']
 
 def transpose(m):
@@ -117,18 +122,22 @@ def searchDictionary(dictionary, clueLines):
                 # Check if it exists in the given line of the clue; if so, remove it and keep processing.
                 # Otherwise, skip to the next Word. Keep track of remaining letters.
                 if character in lineAfter:
-                    lineAfter = lineAfter.replace(character, "", 1)
+                    lineAfter = lineAfter.replace(character, " ", 1)
                 else:
                     wordMatch = False
                     break
 
             # Create a Tuple of the word that was matched to the remaining letters.
             # Store via the original clue line for ease of seeing/tracking where it came from.
+            resultsKey = str(clueLines.index(line)).zfill(2) + line
             if wordMatch:
-                if line in results.keys():
-                    results[line].append( (word, lineAfter) )
+                if resultsKey in results.keys():
+                    results[resultsKey].append( (word, lineAfter) )
                 else:
-                    results[line] = [ (word, lineAfter) ]
+                    results[resultsKey] = [ (word, lineAfter) ]
+
+        if resultsKey not in results.keys():
+            results[resultsKey] = 'EMPTY'
 
     return results
 
@@ -166,14 +175,16 @@ def searchFishWords(clueLines):
     return searchDictionary(fishWords, clueLines)
 
 def searchLocations(clueLines):
-    #return searchDictionary(locations, clueLines)
-    return searchDictionaryFullLine(locations, clueLines)
+    return searchDictionary(locations, clueLines)
+    #return searchDictionaryFullLine(locations, clueLines)
 
 def fishSearch():
-    pp.pprint(searchFishWords(clueFullLines))
+    #pp.pprint(searchFishWords(clueFullLines))
     pp.pprint(searchFishWords(clueSections))
     #pp.pprint(searchFishWords(clueTransposed))
     #pp.pprint(searchFishWords(clueBetweenII))
+    pp.pprint(searchLocations(fishMatches))
+    pp.pprint(searchFishWords(fishMatches))
 
 def locationSearch():
     pp.pprint(searchLocations(clueFullLines))
@@ -220,11 +231,11 @@ def checkTwoLetterModular():
     pp.pprint(twoLetterModular(clueBetweenII))
 
 def main():
-    #fishSearch()
+    fishSearch()
     #locationSearch()
     #skipEveryOtherCheckOdd()
     #skipEveryOtherCheckEven()
-    checkTwoLetterModular()
+    #checkTwoLetterModular()
 
 main()
 
